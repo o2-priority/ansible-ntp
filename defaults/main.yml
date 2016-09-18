@@ -1,0 +1,38 @@
+---
+
+ntp_driftfile: /var/lib/ntp/ntp.drift
+ntp_statsdir: /var/log/ntpstats
+ntp_enable_stats_logging: false
+
+ntp_servers: 
+  - 0.ubuntu.pool.ntp.org
+  - 1.ubuntu.pool.ntp.org
+  - 2.ubuntu.pool.ntp.org
+  - 3.ubuntu.pool.ntp.org
+
+ntp_statistics: "loopstats peerstats clockstats"  # Enable writing of statistics
+
+ntp_filegen:
+  - "loopstats file loopstats type day enable"
+  - "peerstats file peerstats type day enable"
+  - "clockstats file clockstats type day enable"
+
+ntp_restrict:
+  - "-4 default kod notrap nomodify nopeer noquery"
+  - "-6 default kod notrap nomodify nopeer noquery"
+  - "127.0.0.1"
+  - "::1"
+
+ntp_tinker_panic_enabled: false
+ntp_crypto: false                         # Enable public key cryptography
+ntp_listen_interfaces: []
+ntp_includefile: 
+ntp_keys:                                 # key file containing keys and key identifiers 
+ntp_trustedkey:                           # Specify the key identifiers which are trusted. 
+ntp_requestkey:                           # Specify the key identifiers to use with the ntpdc utility.
+ntp_controlkey:                           # Specify the key identifiers to use with the ntpq utility.
+ntp_broadcast:                            # broadcast server
+ntp_broadcastclient:                      # broadcast client
+ntp_multicastclient:                      # multicast client
+ntp_disable_auth: false
+ntp_disable_monitor: true

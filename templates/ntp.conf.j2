@@ -1,0 +1,92 @@
+# Ansible managed
+
+# /etc/ntp.conf, configuration for ntpd; see ntp.conf(5) for help
+
+{% if ntp_tinker_panic_enabled %}
+tinker panic 0
+{% endif %}
+
+driftfile {{ ntp_driftfile }}
+
+# Enable this if you want statistics to be logged.
+#statsdir /var/log/ntpstats/
+{% if ntp_enable_stats_logging %}
+statsdir {{ ntp_statsdir }}
+{% endif %}
+
+{% if ntp_statistics %}
+statistics {{ ntp_statistics }}
+{% endif %}
+
+{% for filegen in ntp_filegen %}
+filegen {{ filegen }}
+{% endfor %}
+
+# Specify one or more NTP servers.
+{% for server in ntp_servers %}
+server {{ server }}
+{% endfor %}
+
+# Access control configuration; see /usr/share/doc/ntp-doc/html/accopt.html for
+# details.  The web page <http://support.ntp.org/bin/view/Support/AccessRestrictions>
+# might also be helpful.
+#
+# Note that "restrict" applies to both servers and clients, so a configuration
+# that might be intended to block requests from certain clients could also end
+# up blocking replies from your own upstream servers.
+
+{% for acl in ntp_restrict %}
+restrict {{ acl }}
+{% endfor %}
+
+# Disable the monitoring facility to prevent amplification attacks using ntpdc
+# monlist command when default restrict does not include the noquery flag. See
+# CVE-2013-5211 for more details.
+# Note: Monitoring will not be disabled with the limited restriction flag.
+{% if ntp_disable_monitor %}
+disable monitor
+{% endif %}
+
+{% for interface in ntp_listen_interfaces %}
+interface listen {{ interface }}
+{% endfor %}
+
+{% if ntp_crypto %}
+crypto
+{% endif %}
+
+{% if ntp_includefile %}
+includefile  {{ ntp_includefile }}
+{% endif %}
+
+{% if ntp_keys %}
+keys {{ ntp_keys }}
+{% endif %}
+
+{% if ntp_trustedkey %}
+trustedkey {{ ntp_trustedkey }}
+{% endif %}
+
+{% if ntp_requestkey %}
+requestkey  {{ ntp_requestkey }}
+{% endif %}
+
+{% if ntp_controlkey %}
+controlkey {{ ntp_controlkey }}
+{% endif %}
+
+{% if ntp_broadcast %}
+broadcast {{ ntp_broadcast }}
+{% endif %}
+
+{% if ntp_disable_auth %}
+disable auth
+{% endif %}
+
+{% if ntp_broadcastclient %}
+broadcastclient
+{% endif %}
+
+{% if ntp_multicastclient %}
+multicastclient {{ ntp_multicastclient }}
+{% endif %}
