@@ -10,7 +10,7 @@ This role installs and configures NTP.
 - hosts: all
 
   roles:
-    - wunzeco.ntp
+    - o2-priority.ntp
 ```
 
 
