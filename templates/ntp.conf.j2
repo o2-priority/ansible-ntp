@@ -24,7 +24,7 @@ filegen {{ filegen }}
 
 # Specify one or more NTP servers.
 {% for server in ntp_servers %}
-server {{ server }}
+server {{ server }} iburst
 {% endfor %}
 
 # Access control configuration; see /usr/share/doc/ntp-doc/html/accopt.html for

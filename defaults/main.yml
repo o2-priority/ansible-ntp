@@ -4,11 +4,11 @@ ntp_driftfile: /var/lib/ntp/ntp.drift
 ntp_statsdir: /var/log/ntpstats
 ntp_enable_stats_logging: false
 
-ntp_servers: 
-  - 0.ubuntu.pool.ntp.org
-  - 1.ubuntu.pool.ntp.org
-  - 2.ubuntu.pool.ntp.org
-  - 3.ubuntu.pool.ntp.org
+ntp_servers:
+  - 0.centos.pool.ntp.org
+  - 1.centos.pool.ntp.org
+  - 2.centos.pool.ntp.org
+  - 3.centos.pool.ntp.org
 
 ntp_statistics: "loopstats peerstats clockstats"  # Enable writing of statistics
 
